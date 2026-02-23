@@ -215,7 +215,7 @@ If `prom-slo-analyzer` helps improve your SLO game, consider:
 
 ## Need More Than Analysis?
 
-Check out **[Reflex](https://reflex.dev)** — AI-powered SLO generation for Kubernetes and Prometheus. Reflex goes beyond analysis to automatically create SLOs, alerting rules, and dashboards based on your actual traffic patterns.
+Check out **[Reflex](https://yusefamen.github.io/reflex-landing/)** — AI-powered SLO generation for Kubernetes and Prometheus. Reflex goes beyond analysis to automatically create SLOs, alerting rules, and dashboards based on your actual traffic patterns.
 
 ## Author
 
