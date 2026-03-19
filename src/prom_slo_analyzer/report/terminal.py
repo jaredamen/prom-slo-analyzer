@@ -64,7 +64,7 @@ class TerminalReporter:
         • Average metrics per service: [green]{total_metrics / total_services:.1f}[/green]
         """
         
-        self.console.print(Panel(summary_text.strip(), title="🔍 Service Discovery"))
+        self.console.print(Panel(summary_text.strip(), title="Service Discovery"))
         
         # Services table
         table = Table(title="Discovered Services", box=box.ROUNDED)
@@ -139,7 +139,7 @@ class TerminalReporter:
             gaps: Gap analysis results for this service
         """
         # Service header
-        title = f"📊 {service.name}"
+        title = f"{service.name}"
         if service.namespace:
             title += f" ({service.namespace})"
         
@@ -191,7 +191,7 @@ class TerminalReporter:
         
         # Create summary
         summary_text = f"""
-        [bold green]✅ SLO Readiness Summary[/bold green]
+        [bold green]SLO Readiness Summary[/bold green]
         
         [bold]Services:[/bold]
         • Total analyzed: {len(services)}
@@ -215,7 +215,7 @@ class TerminalReporter:
                 color = severity_colors.get(severity, "white")
                 summary_text += f"• {severity.value.title()}: [{color}]{count}[/{color}]\n"
         
-        self.console.print(Panel(summary_text.strip(), title="🎯 Overall Results"))
+        self.console.print(Panel(summary_text.strip(), title="Overall Results"))
     
     def _show_classifications_table(self, classifications: List[ClassificationResult]):
         """Show detailed classifications table."""
@@ -289,13 +289,13 @@ class TerminalReporter:
     def _get_sli_emoji(self, sli_type: SLIType) -> str:
         """Get emoji for SLI type."""
         emoji_map = {
-            SLIType.LATENCY: "⏱️",
-            SLIType.ERROR_RATE: "❌", 
-            SLIType.THROUGHPUT: "🚀",
-            SLIType.SATURATION: "📈",
-            SLIType.AVAILABILITY: "✅",
-            SLIType.QUEUE_DEPTH: "📋",
-            SLIType.CONNECTION_POOL: "🔗",
-            SLIType.CACHE_HIT_RATIO: "💾"
+            SLIType.LATENCY: "LATENCY",
+            SLIType.ERROR_RATE: "ERROR", 
+            SLIType.THROUGHPUT: "THROUGHPUT",
+            SLIType.SATURATION: "SATURATION",
+            SLIType.AVAILABILITY: "AVAILABILITY",
+            SLIType.QUEUE_DEPTH: "QUEUE_DEPTH",
+            SLIType.CONNECTION_POOL: "CONNECTION_POOL",
+            SLIType.CACHE_HIT_RATIO: "CACHE_HIT_RATIO"
         }
-        return emoji_map.get(sli_type, "📊")
+        return emoji_map.get(sli_type, "METRICS")

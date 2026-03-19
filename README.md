@@ -25,15 +25,15 @@ prom-slo-analyzer scan --prometheus-url http://localhost:9090 --format markdown 
 
 `prom-slo-analyzer` connects to your Prometheus instance, analyzes your metrics, and tells you:
 
-- ✅ **Which services are ready for SLOs** — services with complete latency, error rate, and throughput metrics
-- ⚠️ **What's missing** — services tracking requests but missing crucial signals like latency or error rates  
-- 🎯 **Specific recommendations** — exactly which metrics to add and how to instrument them
-- 🚀 **Ready-to-use PromQL** — working expressions for your SLI calculations
+- **Which services are ready for SLOs** — services with complete latency, error rate, and throughput metrics
+- **What's missing** — services tracking requests but missing crucial signals like latency or error rates  
+- **Specific recommendations** — exactly which metrics to add and how to instrument them
+- **Ready-to-use PromQL** — working expressions for your SLI calculations
 
 ## Example Output
 
 ```
-🔍 Service Discovery
+Service Discovery
 ┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Service       ┃ Namespace  ┃ Metrics      ┃ Sample Metrics                       ┃
 ┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -42,7 +42,7 @@ prom-slo-analyzer scan --prometheus-url http://localhost:9090 --format markdown 
 │ payment_svc   │ production │ 6            │ transactions_total, queue_depth, ... │
 └───────────────┴────────────┴──────────────┴──────────────────────────────────────┘
 
-📊 api_gateway (production)
+api_gateway (production)
 Total metrics: 8 • SLI candidates: 5 • Identified gaps: 0
 
 SLI Classifications
@@ -54,13 +54,13 @@ SLI Classifications
 │ api_gateway_errors_total                 │ Error Rate  │ 91%        │ rate(...errors_total[5m]) / rate(...[5m])     │
 └──────────────────────────────────────────┴─────────────┴────────────┴────────────────────────────────────────────────┘
 
-⚠️ payment_svc (production) 
+payment_svc (production) 
 🟡 MEDIUM: Missing Latency Metrics
 Service tracks request throughput but lacks latency metrics
 → Add histogram metrics like 'payment_svc_duration_seconds' for latency SLOs
 
-🎯 Overall Results
-✅ SLO Readiness Summary
+Overall Results
+SLO Readiness Summary
 
 Services:
 • Total analyzed: 3
@@ -153,11 +153,11 @@ prom-slo-analyzer/
 
 ### Supported SLI Types
 
-- **🕐 Latency** — Request/response time (histograms, summaries)
-- **❌ Error Rate** — Failed request ratios, HTTP 5xx rates
-- **🚀 Throughput** — Request rates, transaction volumes  
-- **📈 Saturation** — Resource utilization, capacity metrics
-- **✅ Availability** — Uptime, health checks, service status
+- **Latency** — Request/response time (histograms, summaries)
+- **Error Rate** — Failed request ratios, HTTP 5xx rates
+- **Throughput** — Request rates, transaction volumes  
+- **Saturation** — Resource utilization, capacity metrics
+- **Availability** — Uptime, health checks, service status
 
 *Coming Soon:* Queue depth, connection pools, cache hit ratios
 
@@ -209,9 +209,9 @@ pytest
 
 If `prom-slo-analyzer` helps improve your SLO game, consider:
 
-- ⭐ **Starring the repo** — helps others discover the tool
-- ☕ **[Buy me a coffee](https://buymeacoffee.com/YusefAmen)** — fuel more open source work
-- 💖 **[GitHub Sponsors](https://github.com/sponsors/YusefAmen)** — ongoing support for development
+- **Starring the repo** — helps others discover the tool
+- **[Buy me a coffee](https://buymeacoffee.com/YusefAmen)** — fuel more open source work
+- **[GitHub Sponsors](https://github.com/sponsors/YusefAmen)** — ongoing support for development
 
 ## Need More Than Analysis?
 

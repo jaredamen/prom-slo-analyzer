@@ -278,4 +278,4 @@ Contributors are recognized in:
 
 ---
 
-Thank you for contributing to making SLO adoption easier for everyone! 🎉
+Thank you for contributing to making SLO adoption easier for everyone!

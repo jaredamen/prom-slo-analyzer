@@ -105,7 +105,7 @@ class MarkdownReporter:
         gaps: List[GapResult]
     ) -> List[str]:
         """Generate executive summary."""
-        lines = ["## 📊 Executive Summary"]
+        lines = ["## Executive Summary"]
         
         services_with_slis = len([s for s in services if any(c.metric_name in s.metrics for c in classifications)])
         services_with_gaps = len(set(g.service_name for g in gaps))
@@ -117,8 +117,8 @@ class MarkdownReporter:
             "",
             "### Key Findings",
             "",
-            f"- 🎯 **{services_with_slis}/{len(services)}** services have metrics suitable for SLI definition",
-            f"- 📈 **{len(classifications)}** total SLI candidate metrics identified",
+            f"- **{services_with_slis}/{len(services)}** services have metrics suitable for SLI definition",
+            f"- **{len(classifications)}** total SLI candidate metrics identified",
             f"- ⚠️ **{len(gaps)}** gaps found across **{services_with_gaps}** services"
         ])
         
@@ -129,14 +129,14 @@ class MarkdownReporter:
             for severity in [GapSeverity.CRITICAL, GapSeverity.HIGH, GapSeverity.MEDIUM, GapSeverity.LOW]:
                 if severity in gap_severity_counts:
                     count = gap_severity_counts[severity]
-                    emoji = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🔵"}[severity.value]
-                    lines.append(f"- {emoji} **{severity.value.title()}**: {count} issues")
+                    emoji = {"critical": "CRITICAL", "high": "HIGH", "medium": "MEDIUM", "low": "LOW"}[severity.value]
+                    lines.append(f"- **{emoji}**: {count} issues")
         
         return lines
     
     def _generate_discovery_summary(self, services: List[ServiceMetrics]) -> List[str]:
         """Generate service discovery summary."""
-        lines = ["## 🔍 Service Discovery Summary"]
+        lines = ["## Service Discovery Summary"]
         
         if not services:
             lines.extend(["", "No services were discovered in the Prometheus instance."])
@@ -170,7 +170,7 @@ class MarkdownReporter:
     
     def _generate_classification_overview(self, classifications: List[ClassificationResult]) -> List[str]:
         """Generate SLI classification overview.""" 
-        lines = ["## 📋 SLI Classification Overview"]
+        lines = ["## SLI Classification Overview"]
         
         if not classifications:
             lines.extend(["", "No metrics were classified as SLI candidates."])
@@ -208,12 +208,12 @@ class MarkdownReporter:
     
     def _generate_gap_summary(self, gaps: List[GapResult]) -> List[str]:
         """Generate gap analysis summary."""
-        lines = ["## ⚠️ Gap Analysis Summary"]
+        lines = ["## Gap Analysis Summary"]
         
         if not gaps:
             lines.extend([
                 "",
-                "🎉 **Excellent!** No significant gaps were identified in your SLO readiness.",
+                "**Excellent!** No significant gaps were identified in your SLO readiness.",
                 "",
                 "All analyzed services have appropriate metrics for defining SLIs and SLOs."
             ])
@@ -253,8 +253,8 @@ class MarkdownReporter:
         for severity in [GapSeverity.CRITICAL, GapSeverity.HIGH, GapSeverity.MEDIUM, GapSeverity.LOW]:
             if severity in severity_counts:
                 count = severity_counts[severity]
-                emoji = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🔵"}[severity.value]
-                lines.append(f"- {emoji} **{severity.value.title()}**: {count} issues")
+                emoji = {"critical": "CRITICAL", "high": "HIGH", "medium": "MEDIUM", "low": "LOW"}[severity.value]
+                lines.append(f"- **{emoji}**: {count} issues")
         
         return lines
     
@@ -265,7 +265,7 @@ class MarkdownReporter:
         all_gaps: List[GapResult]
     ) -> List[str]:
         """Generate detailed service analysis."""
-        lines = ["## 🔬 Detailed Service Analysis"]
+        lines = ["## Detailed Service Analysis"]
         
         # Group data by service
         classifications_by_service = defaultdict(list)
@@ -296,7 +296,7 @@ class MarkdownReporter:
         gaps: List[GapResult]
     ) -> List[str]:
         """Generate detailed section for one service."""
-        lines = [f"### 📊 {service.name}"]
+        lines = [f"### {service.name}"]
         
         if service.namespace:
             lines.append(f"**Namespace:** {service.namespace}")
@@ -335,9 +335,9 @@ class MarkdownReporter:
             ])
             
             for gap in gaps:
-                severity_emoji = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🔵"}[gap.severity.value]
+                severity_emoji = {"critical": "CRITICAL", "high": "HIGH", "medium": "MEDIUM", "low": "LOW"}[gap.severity.value]
                 lines.extend([
-                    f"**{severity_emoji} {gap.rule_name}** ({gap.severity.value})",
+                    f"**{severity_emoji} - {gap.rule_name}** ({gap.severity.value})",
                     f"- **Issue:** {gap.message}",
                     f"- **Recommendation:** {gap.recommendation}",
                     ""
@@ -347,7 +347,7 @@ class MarkdownReporter:
     
     def _generate_recommendations(self, gaps: List[GapResult]) -> List[str]:
         """Generate overall recommendations."""
-        lines = ["## 💡 Recommendations"]
+        lines = ["## Recommendations"]
         
         if not gaps:
             lines.extend([
@@ -369,7 +369,7 @@ class MarkdownReporter:
         
         if critical_gaps:
             lines.extend([
-                "### 🚨 Immediate Actions Required",
+                "### Immediate Actions Required",
                 "",
                 "Address these critical gaps first:"
             ])
@@ -383,7 +383,7 @@ class MarkdownReporter:
         
         if high_gaps:
             lines.extend([
-                "### 🎯 High Priority Improvements", 
+                "### High Priority Improvements", 
                 "",
                 "These improvements will significantly enhance your SLO readiness:"
             ])
@@ -396,7 +396,7 @@ class MarkdownReporter:
                 ])
         
         lines.extend([
-            "### 📚 General Best Practices",
+            "### General Best Practices",
             "",
             "1. **Start with the Golden Signals**: Focus on latency, error rate, throughput, and saturation",
             "2. **Use histogram metrics**: Prefer histogram metrics over averages for latency measurements", 
@@ -409,7 +409,7 @@ class MarkdownReporter:
     def _generate_appendix(self) -> List[str]:
         """Generate appendix with additional information."""
         lines = [
-            "## 📖 Appendix",
+            "## Appendix",
             "",
             "### SLI Types Explained",
             "",
@@ -428,7 +428,7 @@ class MarkdownReporter:
             "",
             "---",
             "",
-            "*Generated with ❤️ by prom-slo-analyzer*"
+            "*Generated by prom-slo-analyzer*"
         ]
         
         return lines
