@@ -4,7 +4,6 @@ import sys
 from typing import Optional
 
 import typer
-import typer.main
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
@@ -30,7 +29,7 @@ app = typer.Typer(
 console = Console()
 
 
-@app.command()  # type: ignore[misc]
+@app.command()
 def scan(
     prometheus_url: Optional[str] = typer.Option(
         None,
@@ -177,7 +176,7 @@ def scan(
         raise typer.Exit(1) from e
 
 
-@app.command()  # type: ignore[misc]
+@app.command()
 def discover(
     prometheus_url: Optional[str] = typer.Option(
         None,
@@ -237,7 +236,7 @@ def discover(
         raise typer.Exit(1) from e
 
 
-@app.callback()  # type: ignore[misc]
+@app.callback()
 def main(version: bool = typer.Option(False, "--version", help="Show version and exit")) -> None:
     """
     Prometheus SLO Analyzer
