@@ -3,9 +3,8 @@
 import sys
 from typing import Optional
 
-import typer.main
-
 import typer
+import typer.main
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
