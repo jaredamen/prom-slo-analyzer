@@ -1,9 +1,9 @@
 """Report generation and formatting utilities."""
 
-from .terminal import TerminalReporter
 from .markdown import MarkdownReporter
+from .terminal import TerminalReporter
 
 __all__ = [
-    'TerminalReporter',
-    'MarkdownReporter',
+    "TerminalReporter",
+    "MarkdownReporter",
 ]

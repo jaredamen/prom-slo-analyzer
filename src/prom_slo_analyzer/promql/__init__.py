@@ -4,6 +4,6 @@ from .templates import SLOTemplates
 from .validator import PromQLValidator
 
 __all__ = [
-    'SLOTemplates',
-    'PromQLValidator',
+    "SLOTemplates",
+    "PromQLValidator",
 ]

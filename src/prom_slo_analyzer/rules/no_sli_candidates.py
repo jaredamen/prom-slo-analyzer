@@ -1,37 +1,35 @@
 """Rule to detect services with no SLI candidates."""
 
-from typing import List
-
-from .base import BaseRule, GapResult, GapSeverity
-from ..discovery import ServiceMetrics
 from ..classifiers.base import ClassificationResult
+from ..discovery import ServiceMetrics
+from .base import BaseRule, GapResult, GapSeverity
 
 
 class NoSLICandidatesRule(BaseRule):
     """Detects services that exist in Prometheus but have no metrics suitable for SLIs.
-    
+
     This identifies services that are being scraped but lack the fundamental metrics
     needed for any type of SLO.
     """
-    
+
     @property
     def rule_name(self) -> str:
         return "No SLI Candidates"
-    
-    def check(self, service: ServiceMetrics, classifications: List[ClassificationResult]) -> List[GapResult]:
+
+    def check(self, service: ServiceMetrics, classifications: list[ClassificationResult]) -> list[GapResult]:
         """Check if service has any metrics suitable for SLIs.
-        
+
         Args:
             service: The service to analyze
             classifications: List of metric classifications for this service
-            
+
         Returns:
             List containing gap result if no SLI candidates found, empty list otherwise
         """
         # If there are any classifications, service has SLI candidates
         if classifications:
             return []
-        
+
         # If service has no metrics at all, it might not be properly instrumented
         if not service.metrics:
             severity = GapSeverity.CRITICAL
@@ -52,12 +50,14 @@ class NoSLICandidatesRule(BaseRule):
                 "error counters or HTTP status codes (for error rate), latency histograms "
                 "(for response time), and health check metrics (for availability)."
             )
-        
-        return [GapResult(
-            rule_name=self.rule_name,
-            service_name=service.name,
-            severity=severity,
-            message=message,
-            recommendation=recommendation,
-            affected_metrics=service.metrics[:10]  # Include first 10 metrics as examples
-        )]
+
+        return [
+            GapResult(
+                rule_name=self.rule_name,
+                service_name=service.name,
+                severity=severity,
+                message=message,
+                recommendation=recommendation,
+                affected_metrics=service.metrics[:10],  # Include first 10 metrics as examples
+            )
+        ]

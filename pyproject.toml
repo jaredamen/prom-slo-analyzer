@@ -194,3 +194,9 @@ warn_unused_ignores = true
 [[tool.mypy.overrides]]
 module = "tests.*"
 ignore_errors = true
+
+[dependency-groups]
+dev = [
+    "twine>=6.2.0",
+    "types-requests>=2.32.4.20260107",
+]
