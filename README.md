@@ -2,7 +2,7 @@
 
 **Instantly assess your Prometheus metrics for SLO readiness — discover which services have the right signals for SLIs, identify gaps, and get actionable recommendations.**
 
-[![CI Status](https://github.com/YusefAmen/prom-slo-analyzer/workflows/CI/badge.svg)](https://github.com/YusefAmen/prom-slo-analyzer/actions)
+[![CI Status](https://github.com/jaredamen/prom-slo-analyzer/workflows/CI/badge.svg)](https://github.com/jaredamen/prom-slo-analyzer/actions)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
