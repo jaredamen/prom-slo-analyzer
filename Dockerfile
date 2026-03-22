@@ -13,7 +13,7 @@ RUN groupadd --gid 1000 analyzer && \
 WORKDIR /app
 
 # Copy requirements first for better Docker layer caching
-COPY pyproject.toml ./
+COPY pyproject.toml README.md LICENSE ./
 COPY src/ ./src/
 
 # Install the package and its dependencies
@@ -36,6 +36,6 @@ LABEL org.opencontainers.image.title="Prometheus SLO Analyzer"
 LABEL org.opencontainers.image.description="Analyze Prometheus metrics for SLO readiness"
 LABEL org.opencontainers.image.version="0.1.0"
 LABEL org.opencontainers.image.authors="Jared (Yusef) Amen <yusef@example.com>"
-LABEL org.opencontainers.image.url="https://github.com/YusefAmen/prom-slo-analyzer"
-LABEL org.opencontainers.image.source="https://github.com/YusefAmen/prom-slo-analyzer"
+LABEL org.opencontainers.image.url="https://github.com/jaredamen/prom-slo-analyzer"
+LABEL org.opencontainers.image.source="https://github.com/jaredamen/prom-slo-analyzer"
 LABEL org.opencontainers.image.licenses="MIT"
