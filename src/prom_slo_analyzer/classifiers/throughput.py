@@ -91,6 +91,7 @@ class ThroughputClassifier(BaseClassifier):
             "_transaction_total",
             "_orders_total",
             "_purchases_total",
+            "purchases_total",
             "_payments_total",
             "_uploads_total",
             "_downloads_total",

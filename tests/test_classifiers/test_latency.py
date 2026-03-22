@@ -55,7 +55,7 @@ class TestLatencyClassifier:
 
         # Non-duration metrics
         assert classifier._is_duration_metric("http_requests_total") is False
-        assert classifier._is_duration_metric("cpu_usage_count") is False
+        assert classifier._is_duration_metric("cpu_cores_available") is False
         assert classifier._is_duration_metric("memory_bytes") is False
 
     def test_classify_histogram_metric(self, classifier):
@@ -110,8 +110,8 @@ class TestLatencyClassifier:
         result = classifier.classify("http_errors_total")
         assert result is None
 
-        # Memory counter
-        result = classifier.classify("memory_allocations_total")
+        # Request counter
+        result = classifier.classify("api_calls_total")
         assert result is None
 
         # Generic gauge

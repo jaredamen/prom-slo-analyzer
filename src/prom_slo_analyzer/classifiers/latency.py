@@ -71,17 +71,46 @@ class LatencyClassifier(BaseClassifier):
             "wait_time",
         ]
 
-        time_units = ["seconds", "milliseconds", "microseconds", "nanoseconds", "ms", "us", "ns", "_time"]
+        time_units = ["_seconds", "_milliseconds", "_microseconds", "_nanoseconds", "_ms", "_us", "_ns", "_time"]
+        # More specific time unit patterns to avoid false positives
+        time_unit_patterns = [
+            r"_seconds$",
+            r"seconds$",
+            r"_ms$",
+            r"_milliseconds$",
+            r"_us$",
+            r"_microseconds$",
+            r"_ns$",
+            r"_nanoseconds$",
+        ]
 
         name_lower = metric_name.lower()
 
         # Check for duration keywords
         has_duration_keyword = any(pattern in name_lower for pattern in duration_patterns)
 
-        # Check for time units
-        has_time_unit = any(unit in name_lower for unit in time_units)
+        # Check for time units (more specific matching)
+        import re
 
-        return has_duration_keyword or has_time_unit
+        has_time_unit = any(unit in name_lower for unit in time_units) or any(
+            re.search(pattern, name_lower) for pattern in time_unit_patterns
+        )
+
+        # Additional check: avoid classifying temperature or other non-time metrics
+        non_time_keywords = [
+            "temperature",
+            "cpu",
+            "memory",
+            "disk",
+            "network",
+            "bytes",
+            "percent",
+            "celsius",
+            "fahrenheit",
+        ]
+        has_non_time_keyword = any(keyword in name_lower for keyword in non_time_keywords)
+
+        return (has_duration_keyword or has_time_unit) and not has_non_time_keyword
 
     def _classify_histogram(self, metric_name: str, metadata: Optional[dict[str, Any]]) -> ClassificationResult:
         """Classify histogram metric for latency SLI."""

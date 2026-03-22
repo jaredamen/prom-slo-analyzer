@@ -100,6 +100,10 @@ class ServiceDiscovery:
 
         # Common service prefixes
         service_patterns = [
+            # Processing/latency patterns - extract first component for metrics like "order_processing_latency_seconds"
+            r"^([a-zA-Z]+)_(?:processing|handling)_(?:latency|duration)_seconds?$",
+            # Business metrics - extract first component for business terms
+            r"^([a-zA-Z]+)_(?:transactions?|orders?|purchases?|payments?)_total$",
             # Direct service prefix patterns
             r"^([a-zA-Z][a-zA-Z0-9_]*?)_(?:requests?|http|errors?|latency|duration|status|health|up)_",
             r"^([a-zA-Z][a-zA-Z0-9_]*?)_(?:total|count|seconds?|bytes?|ratio)$",
@@ -169,6 +173,8 @@ class ServiceDiscovery:
             "api",
             "request",
             "requests",
+            "http_requests",
+            "request_duration",
             "response",
             "responses",
             "error",

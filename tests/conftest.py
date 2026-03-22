@@ -72,7 +72,7 @@ def mock_prometheus_client(sample_metric_names):
 
     # Mock label responses
     def mock_get_labels(metric_name: str):
-        if "http" in metric_name.lower():
+        if "http" in metric_name.lower() or "request" in metric_name.lower() or "gateway" in metric_name.lower():
             return ["method", "status", "endpoint"]
         elif "transaction" in metric_name.lower():
             return ["type", "status", "payment_method"]
